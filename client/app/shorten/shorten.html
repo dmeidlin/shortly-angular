@@ -1,9 +1,15 @@
 <div id='container'>
   <div id='create'>
-    <form>
-        <input class='text' type='text' name='url'>
-        <input type='submit' value='Shorten'>
+    <form name='shortlyForm' ng-submit='addLink()' novalidate>
+        <input class='text' type='url' name='linkField' required
+        ng-class="{'error': shortlyForm.$invalid  && shortlyForm.$dirty}" ng-model="link.url">
+        <input type='submit' value='Shorten' ng-disabled='shortlyForm.$invalid'>
     </form>
-    <div class='message'></div>
+    <div ng-if='shortlyForm.linkField.$error.required && shortlyForm.$dirty' class='message'>
+      <h2>Url required</h2>
+    </div>
+    <div ng-show='shortlyForm.linkField.$error.url && shortlyForm.$dirty' class='message'>
+      <h2>Not a valid URL.</h2>
+    </div>
   </div>
 </div>
