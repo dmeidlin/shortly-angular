@@ -60,7 +60,7 @@ angular.module('shortly', [
   //sprint authentication solution is broken!!!
   //switching route to next.$$route.controller fixes it but locks the user into signin preventing an initial signup
   $rootScope.$on('$routeChangeStart', function (evt, next, current) {
-    if (next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
+    if (next.$$route && next.$$route.controller !== 'AuthController' && !Auth.isAuth()) {
       $location.path('/signin');
     }
   });
